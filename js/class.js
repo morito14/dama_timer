@@ -9,9 +9,11 @@ class Clock {
     this.screenShakeValue = 200;
     /* for time controlling */
     this.time = 60.;
-    this.delayTime = 2.;
+    this.delayTime = 1.;
     this.delayTimeLeft = 0.1;
-    this.timeLeft = 30.4;
+    this.timeLeft = 9.4;
+    /* flags */
+    this.flgSTOP
   }
 
   run(){
@@ -20,6 +22,8 @@ class Clock {
     //this.shake();
     this.drawBaseRing();
     this.drawDelayRing();
+    this.drawTensionCircle();
+    this.drawTime();
     pop();
   }
 
@@ -34,12 +38,36 @@ class Clock {
   }
 
   drawTensionCircle(){
-    let percent = this.timeLeft / this.Time;
+    let percent = this.timeLeft / this.time;
     let circlePercent = map(percent, 0, 1, 1, 0);
-    let pulse = this.timeLeft % 1;
+    let pulse = (this.timeLeft % 1) * this.sizeClock * 0.01;
 
-    draw
+    push();
+    fill(175, 29, 41);
+    noStroke();
+    ellipse(0, 0, circlePercent * this.sizeClock + pulse);
+    pop();
 
+    //for debug
+    this.timeLeft -= 1/FRAME_RATE;
+    if (this.timeLeft < 0){
+      this.timeLeft = this.time;
+    }
+
+  }
+
+  drawTime(){
+
+    push();
+    strokeWeight(0);
+    textSize(150);
+    textStyle(BOLD);
+    textAlign(CENTER, TOP);
+    let textHeight = textAscent();
+    fill('white');
+    text(ceil(this.timeLeft), 0, -(textHeight / 2.));
+
+    pop();
   }
 
   drawDelayRing(){
@@ -62,9 +90,9 @@ class Clock {
         pop();
       }
 
-      this.delayTimeLeft -= 0.01;//for debug
+      this.delayTimeLeft -= 1/FRAME_RATE;//for debug
     } else{
-      this.delayTimeLeft = 2.0;//for debug
+      this.delayTimeLeft = 1.0;//for debug
     }
   }
 
@@ -81,6 +109,7 @@ class Clock {
 class System {
   constructor(){
   }
+
 
   drawInfo4Debug(){
     push();
