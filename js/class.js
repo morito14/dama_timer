@@ -13,7 +13,7 @@ class Clock {
     this.delayTimeLeft = 0.1;
     this.timeLeft = 9.4;
     /* flags */
-    this.flgSTOP
+    this.flgSTOP = true;
   }
 
   run(){
@@ -24,6 +24,7 @@ class Clock {
     this.drawDelayRing();
     this.drawTensionCircle();
     this.drawTime();
+    this.drawCover();
     pop();
   }
 
@@ -35,6 +36,16 @@ class Clock {
     strokeWeight(12.);
     ellipse(0, 0, this.sizeClock);
     pop();
+  }
+
+  drawCover(){
+    if (this.flgSTOP){
+      push();
+      fill(0, 0, 0, 150);
+      noStroke();
+      ellipse(0, 0, this.sizeClock * 1.1);
+      pop();
+    }
   }
 
   drawTensionCircle(){
