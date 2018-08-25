@@ -11,7 +11,7 @@ class Clock {
     this.time = 60.;
     this.delayTime = 2.;
   }
-
+/test
   run(){
     push();
     translate(this.x0, this.y0);
