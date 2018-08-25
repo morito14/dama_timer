@@ -1,3 +1,4 @@
+//okoko
 class Clock {
   constructor(x0, y0){
     this.x0 = x0;
