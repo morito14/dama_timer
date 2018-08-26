@@ -2,18 +2,17 @@ class Clock {
   constructor(x0, y0){
     this.x0 = x0;
     this.y0 = y0;
-    this.time
     /* for clock appearance */
     this.sizeClock = width / 2.2;
     /* for shaking */
     this.screenShakeValue = 200;
     /* for time controlling */
     this.time = 60.;
-    this.delayTime = 1.;
-    this.delayTimeLeft = 0.1;
     this.timeLeft = 9.4;
+    this.delayTime = 1.;
+    this.delayTimeLeft = 1.;
     /* flags */
-    this.flgSTOP = true;
+    this.flgSTOP = false;
   }
 
   run(){
@@ -67,6 +66,20 @@ class Clock {
 
   }
 
+  resetVars(){
+    /* for clock appearance */
+    this.sizeClock = width / 2.2;
+    /* for shaking */
+    this.screenShakeValue = 200;
+    /* for time controlling */
+    this.time = 60.;
+    this.timeLeft = 9.4;
+    this.delayTime = 1.;
+    this.delayTimeLeft = 1.;
+    /* flags */
+    this.flgSTOP = true;
+  }
+
   drawTime(){
 
     push();
@@ -84,22 +97,26 @@ class Clock {
   drawDelayRing(){
     if (this.delayTimeLeft >= 0) { //when delay time left
       let percent = this.delayTimeLeft / this.delayTime
-      let angle = map(percent, 0, 1, 0, 2*PI);
+      let angle = map(percent, 0, 1, 0, 2. * PI);
+      push();
+      noFill()
+      stroke(33, 175, 255);//blue
+      strokeWeight(12.);
 
-      for (let i = 0; i <= angle; i+=.02){
-        push();
-        fill(33, 175, 255);//blue
-        noStroke();
-        let x = cos(-(i + (PI / 2))) * this.sizeClock / 2.;
-        let y = sin(-(i + (PI / 2))) * this.sizeClock / 2.;
-        ellipse(x, y, 12);
+      //draw ring
+      arc(0, 0, this.sizeClock, this.sizeClock,
+        -(angle + PI / 2), -PI / 2.);
 
-        //Edge of Ring
-        if (abs(i - angle) < 0.02){
-          ellipse(x, y, 21);
-        }
-        pop();
-      }
+      //drwa edge of Ring
+      noStroke();
+      fill(33, 175, 255);//blue
+      let x = cos(-(angle + (PI / 2))) * this.sizeClock / 2.;
+      let y = sin(-(angle + (PI / 2))) * this.sizeClock / 2.;
+      ellipse(x, y, 21);
+
+
+      pop();
+
 
       this.delayTimeLeft -= 1/FRAME_RATE;//for debug
     } else{
