@@ -83,13 +83,13 @@ class Clock {
   drawTime(){
 
     push();
-    strokeWeight(0);
-    textSize(150);
+    //stroke('black');//blue
+    //strokeWeight(3.);
+    textSize(230);
     textStyle(BOLD);
-    textAlign(CENTER, TOP);
-    let textHeight = textAscent();
+    textAlign(CENTER, CENTER);
     fill('white');
-    text(ceil(this.timeLeft), 0, -(textHeight / 2.));
+    text(str(ceil(this.timeLeft)), 0, 0);
 
     pop();
   }
