@@ -1,12 +1,12 @@
 let r = 1;
 let angle = 0;
-const FRAME_RATE = 30;
+const FRAME_RATE = 60;
 //let fontRegular, fontBold;
 
 function setup(){
+  fullscreen();
   createCanvas(800, 800 * 0.5625);//描画領域を指定
-  background('black');//毎フレームごとに黒色描画
-  frameRate(30);
+  frameRate(60);
   clock_left = new Clock(-(width / 3.95), height / 15);
   clock_right = new Clock(+(width / 3.95), height / 15);
   system = new System();
@@ -25,7 +25,8 @@ function draw(){
 
 function keyPressed(){
   if (key === 'u'){
-    r += 10;
+    clock_left.resetVars();
+    clock_right.resetVars();
   }
 
   return false;
