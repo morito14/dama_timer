@@ -17,6 +17,11 @@ class Clock {
     this.flgTimeOver = false;
   }
 
+  startStop(){
+    this.flgStop = !this.flgStop;
+    this.delayTimeLeft = this.delayTime;
+  }
+
   timeUpdate() {
     if (!this.flgStop && !this.flgTimeOver) {
       if (this.delayTimeLeft > 0.01) {
