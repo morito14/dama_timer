@@ -120,6 +120,9 @@ class Clock {
       strokeWeight(12.);
 
       //draw ring
+      if (percent == 1) {
+        ellipse(0, 0, this.sizeClock);
+      }
       arc(0, 0, this.sizeClock, this.sizeClock,
         -(angle + PI / 2), -PI / 2.);
 
