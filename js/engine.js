@@ -1,5 +1,9 @@
-class System {
+class Engine {
   constructor(){
+  }
+
+  run(){
+    this.drawInfo4Debug();
   }
 
 

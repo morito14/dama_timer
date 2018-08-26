@@ -6,21 +6,20 @@ const FRAME_RATE = 60;
 function setup(){
   fullscreen();
   createCanvas(800, 800 * 0.5625);//描画領域を指定
-  frameRate(60);
+  frameRate(FRAME_RATE);
   clock_left = new Clock(-(width / 3.95), height / 15);
   clock_right = new Clock(+(width / 3.95), height / 15);
-  system = new System();
+  engine = new Engine();
 }
 
 function draw(){
   background('black');
   smooth();
-  //system.drawInfo4Debug();
+  engine.drawInfo4Debug();
 
   translate(width / 2., height / 2.);
   clock_left.run();
   clock_right.run();
-
 }
 
 function keyPressed(){

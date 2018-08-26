@@ -7,18 +7,39 @@ class Clock {
     /* for shaking */
     this.screenShakeValue = 200;
     /* for time controlling */
+    //this.timeStart =
     this.time = 60.;
     this.timeLeft = 9.4;
     this.delayTime = 1.;
     this.delayTimeLeft = 1.;
     /* flags */
-    this.flgSTOP = false;
+    this.flgStop = false;
+    this.flgTimeOver = false;
+  }
+
+  timeUpdate() {
+    if (!this.flgStop && !this.flgTimeOver) {
+      if (this.delayTimeLeft > 0.01) {
+        this.delayTimeLeft -= 1 / FRAME_RATE;
+      } else {
+        if (this.timeLeft > 0.01) {
+          this.timeLeft -= 1 / FRAME_RATE;
+        } else {
+          print('timeout');
+          this.timeLeft = 0.;
+          this.delayTimeLeft = 0.;
+          this.flgTimeOver = true;
+          this.flgStop = true;
+        }
+      }
+    }
   }
 
   run(){
     push();
     translate(this.x0, this.y0);
     //this.shake();
+    this.timeUpdate();
     this.drawBaseRing();
     this.drawDelayRing();
     this.drawTensionCircle();
@@ -38,7 +59,7 @@ class Clock {
   }
 
   drawCover(){
-    if (this.flgSTOP){
+    if (this.flgStop){
       push();
       fill(0, 0, 0, 150);
       noStroke();
@@ -59,25 +80,20 @@ class Clock {
     pop();
 
     //for debug
-    this.timeLeft -= 1/FRAME_RATE;
-    if (this.timeLeft < 0){
-      this.timeLeft = this.time;
-    }
+    //this.timeLeft -= 1/FRAME_RATE;
+    //if (this.timeLeft < 0){
+    //  this.timeLeft = this.time;
+    //}
 
   }
 
   resetVars(){
-    /* for clock appearance */
-    this.sizeClock = width / 2.2;
-    /* for shaking */
-    this.screenShakeValue = 200;
-    /* for time controlling */
-    this.time = 60.;
-    this.timeLeft = 9.4;
-    this.delayTime = 1.;
-    this.delayTimeLeft = 1.;
+    //this.timeStart =
+    this.timeLeft = this.time;
+    this.delayTimeLeft = this.delayTime;
     /* flags */
-    this.flgSTOP = true;
+    this.flgStop = false;
+    this.flgTimeOver = false;
   }
 
   drawTime(){
@@ -118,9 +134,9 @@ class Clock {
       pop();
 
 
-      this.delayTimeLeft -= 1/FRAME_RATE;//for debug
+      //this.delayTimeLeft -= 1/FRAME_RATE;//for debug
     } else{
-      this.delayTimeLeft = 1.0;//for debug
+      //this.delayTimeLeft = 1.0;//for debug
     }
   }
 
@@ -132,21 +148,4 @@ class Clock {
     }
   }
 
-}
-
-class System {
-  constructor(){
-  }
-
-
-  drawInfo4Debug(){
-    push();
-    stroke('white');
-    strokeWeight(5);
-    textSize(32);
-    text('width=' + width, 10, 30);
-    text('height=' + height, 10, 60);
-
-    pop();
-  }
 }
