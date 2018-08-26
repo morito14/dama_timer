@@ -92,7 +92,7 @@ class Clock {
     this.timeLeft = this.time;
     this.delayTimeLeft = this.delayTime;
     /* flags */
-    this.flgStop = false;
+    this.flgStop = true;
     this.flgTimeOver = false;
   }
 
