@@ -1,5 +1,5 @@
 class Clock {
-  constructor(x0, y0){
+  constructor(x0, y0, time, delayTime){
     this.x0 = x0;
     this.y0 = y0;
     /* for clock appearance */
@@ -8,13 +8,16 @@ class Clock {
     this.screenShakeValue = 200;
     /* for time controlling */
     //this.timeStart =
-    this.time = 60.;
-    this.timeLeft = 9.4;
-    this.delayTime = 1.;
-    this.delayTimeLeft = 1.;
+    this.time = time;
+    this.timeLeft = time;
+    this.delayTime = delayTime;
+    this.delayTimeLeft = delayTime;
     /* flags */
     this.flgStop = false;
     this.flgTimeOver = false;
+    if (delayTime == 0) {
+      this.flgNoDelay = true;
+    }
   }
 
   startStop(){
@@ -27,6 +30,7 @@ class Clock {
       if (this.delayTimeLeft > 0.01) {
         this.delayTimeLeft -= 1 / FRAME_RATE;
       } else {
+        this.delayTimeLeft = 0.;
         if (this.timeLeft > 0.01) {
           this.timeLeft -= 1 / FRAME_RATE;
         } else {
@@ -116,7 +120,7 @@ class Clock {
   }
 
   drawDelayRing(){
-    if (this.delayTimeLeft >= 0) { //when delay time left
+    if (this.delayTimeLeft > 0 && !this.flgNoDelay) { //when delay time left
       let percent = this.delayTimeLeft / this.delayTime
       let angle = map(percent, 0, 1, 0, 2. * PI);
       push();
