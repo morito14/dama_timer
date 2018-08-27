@@ -5,7 +5,7 @@ class Clock {
     /* for clock appearance */
     this.sizeClock = width / 2.2;
     /* for shaking */
-    this.screenShakeValue = 200;
+    this.screenShakeValue = -1;
     /* for time controlling */
     //this.timeStart =
     this.time = time;
@@ -18,6 +18,12 @@ class Clock {
     if (delayTime == 0) {
       this.flgNoDelay = true;
     }
+
+    /* for sound effects*/
+    //soundFormats('wav');
+    //this.tick1 = loadSound('./assets/tick1.wav');
+    //this.tick1.setVolume(1);
+    //this.tick1.play();
   }
 
   startStop(){
@@ -38,7 +44,7 @@ class Clock {
           this.timeLeft = 0.;
           this.delayTimeLeft = 0.;
           this.flgTimeOver = true;
-          this.flgStop = true;
+          //this.flgStop = true;
         }
       }
     }
@@ -47,7 +53,7 @@ class Clock {
   run(){
     push();
     translate(this.x0, this.y0);
-    //this.shake();
+    this.shake();
     this.timeUpdate();
     this.drawBaseRing();
     this.drawDelayRing();
@@ -100,6 +106,7 @@ class Clock {
     //this.timeStart =
     this.timeLeft = this.time;
     this.delayTimeLeft = this.delayTime;
+    this.screenShakeValue = -1;
     /* flags */
     this.flgStop = true;
     this.flgTimeOver = false;
@@ -153,6 +160,9 @@ class Clock {
   }
 
   shake(){
+    if (this.flgTimeOver && this.screenShakeValue == -1) {
+      this.screenShakeValue = 200;
+    }
     if (this.screenShakeValue > 0.0) {
       translate(random(-this.screenShakeValue, this.screenShakeValue),
           random(-this.screenShakeValue, this.screenShakeValue));
