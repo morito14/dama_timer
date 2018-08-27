@@ -85,7 +85,7 @@ class Clock {
     push();
     fill(175, 29, 41);
     noStroke();
-    ellipse(0, 0, circlePercent * this.sizeClock + pulse);
+    ellipse(0, 0, circlePercent * (this.sizeClock - 12) + pulse);
     pop();
 
     //for debug
