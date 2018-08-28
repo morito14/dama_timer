@@ -8,26 +8,26 @@ class Clock {
     this.screenShakeValue = -1;
     /* for time controlling */
     //this.timeStart =
+    this.tmpTime = time;
     this.time = time;
     this.timeLeft = time;
     this.delayTime = delayTime;
     this.delayTimeLeft = delayTime;
     /* flags */
-    this.flgStop = false;
+    this.flgStop = true;
     this.flgTimeOver = false;
     if (delayTime == 0) {
       this.flgNoDelay = true;
     }
-
-    /* for sound effects*/
-    //soundFormats('wav');
-    //this.tick1 = loadSound('./assets/tick1.wav');
-    //this.tick1.setVolume(1);
-    //this.tick1.play();
   }
 
-  startStop(){
-    this.flgStop = !this.flgStop;
+  timerStop(){
+    this.flgStop = true;
+    this.delayTimeLeft = this.delayTime;
+  }
+
+  timerStart(){
+    this.flgStop = false;
     this.delayTimeLeft = this.delayTime;
   }
 
@@ -50,6 +50,24 @@ class Clock {
     }
   }
 
+  playTickTock(){
+    if (ceil(this.tmpTime) != ceil(this.timeLeft) && this.delayTimeLeft == 0) {
+      if (ceil(this.tmpTime) > 10) {
+        if (ceil(this.timeLeft) % 2 == 0) {
+          tick1.play();
+        } else {
+          tick2.play();
+        }
+      } else if (ceil(this.timeLeft) >= 1) {
+        countSound[ceil(this.timeLeft) - 1].play();
+      } else {
+        explosion.play();
+      }
+
+    }
+    this.tmpTime = this.timeLeft
+  }
+
   run(){
     push();
     translate(this.x0, this.y0);
@@ -60,6 +78,7 @@ class Clock {
     this.drawTensionCircle();
     this.drawTime();
     this.drawCover();
+    this.playTickTock();
     pop();
   }
 
@@ -166,7 +185,7 @@ class Clock {
     if (this.screenShakeValue > 0.0) {
       translate(random(-this.screenShakeValue, this.screenShakeValue),
           random(-this.screenShakeValue, this.screenShakeValue));
-      this.screenShakeValue -= 200.0 / FRAME_RATE;
+      this.screenShakeValue -= 70.0 / FRAME_RATE;
     }
   }
 

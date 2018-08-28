@@ -1,9 +1,23 @@
 class Engine {
   constructor(){
+    this.iconSize = width / 15;
+    this.iconX = width / 2.2;
+    this.iconY = - height / 2.5;
   }
 
-  run(){
-    this.drawInfo4Debug();
+  runSetting(){
+    image(img_back, -this.iconX, this.iconY, this.iconSize, this.iconSize);
+
+  }
+
+  runTimer(){
+    imageMode(CENTER);
+    image(img_refresh, this.iconX, this.iconY, this.iconSize, this.iconSize);
+    image(img_setting, -this.iconX, this.iconY, this.iconSize, this.iconSize);
+  }
+
+  drawArrow(){
+
   }
 
 

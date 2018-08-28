@@ -1,6 +1,6 @@
 class Counter {
   constructor(){
-    this.count = 12;
+    this.count = 0;
   }
 
   run(){
@@ -17,7 +17,7 @@ class Counter {
     textAlign(CENTER, CENTER);
     //fill(33, 175, 255);
     fill('white');
-    text(str(this.count), 0, -height / 3.5);
+    text(str(ceil(this.count / 2)), 0, -height / 3.5);
     pop();
   }
 
