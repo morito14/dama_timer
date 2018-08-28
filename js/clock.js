@@ -52,7 +52,7 @@ class Clock {
 
   playTickTock(){
     if (ceil(this.tmpTime) != ceil(this.timeLeft) && this.delayTimeLeft == 0) {
-      if (ceil(this.tmpTime) > 10) {
+      if (ceil(this.tmpTime) > 11) {
         if (ceil(this.timeLeft) % 2 == 0) {
           tick1.play();
         } else {
