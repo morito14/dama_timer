@@ -123,12 +123,21 @@ class Clock {
 
   resetVars(){
     //this.timeStart =
+    this.tmpTime = timerTime;
+    this.time = timerTime;
+    this.delayTime = timerDelayTime;
     this.timeLeft = this.time;
+    print('timerDelayTIme =' + timerDelayTime);
     this.delayTimeLeft = this.delayTime;
     this.screenShakeValue = -1;
     /* flags */
     this.flgStop = true;
     this.flgTimeOver = false;
+    if (timerDelayTime == 0) {
+      this.flgNoDelay = true;
+    } else {
+      this.flgNoDelay = false;
+    }
   }
 
   drawTime(){
@@ -137,6 +146,9 @@ class Clock {
     //stroke('black');//blue
     //strokeWeight(3.);
     textSize(230);
+    if (this.timeLeft >= 99){
+      textSize(150);
+    }
     textStyle(BOLD);
     textAlign(CENTER, CENTER);
     fill('white');
@@ -170,8 +182,6 @@ class Clock {
 
 
       pop();
-
-
       //this.delayTimeLeft -= 1/FRAME_RATE;//for debug
     } else{
       //this.delayTimeLeft = 1.0;//for debug

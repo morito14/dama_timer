@@ -1,8 +1,8 @@
-let r = 1;
-let angle = 0;
-let phase = 0;
+let phase = 2;
 let nowPlayer = 0;
-const FRAME_RATE = 10;
+const FRAME_RATE = 60;
+let timerTime = 20.;
+let timerDelayTime = 1.;
 //let fontRegular, fontBold;
 let countSound = new Array();
 let tick1, tick2;
@@ -34,8 +34,8 @@ function setup(){
   //createCanvas(windowWidth, windowHeight);//描画領域を指定
   createCanvas(800, 800 * 0.5625);//描画領域を指定
   frameRate(FRAME_RATE);
-  clock_left = new Clock(-(width / 3.95), height / 15, 60., 0.5);
-  clock_right = new Clock(+(width / 3.95), height / 15, 60., 0.5);
+  clock_left = new Clock(-(width / 3.95), height / 15, timerTime, timerDelayTime);
+  clock_right = new Clock(+(width / 3.95), height / 15, timerTime, timerDelayTime);
   engine = new Engine();
   counter = new Counter();
 }
@@ -88,6 +88,32 @@ function keyPressed(){
     counter.resetVars();
     phase = 0;
     nowPlayer = (nowPlayer +1) % 2;
+  }
+
+  if (key == 's'){
+    clock_left.resetVars();
+    clock_right.resetVars();
+    counter.resetVars();
+
+    if (phase == 2) {
+      phase = 0;
+    } else {
+      phase = 2;
+    }
+  }
+
+  //for debug
+  if (key == 'j'){
+    engine.decreTimerTimeIndex();
+  }
+  if (key == 'k'){
+    engine.increTimerTimeIndex();
+  }
+  if (key == 'n'){
+    engine.decreTimerDelayTimeIndex();
+  }
+  if (key == 'm'){
+    engine.increTimerDelayTimeIndex();
   }
 
   if (key == ' '){
