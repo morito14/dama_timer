@@ -19,6 +19,7 @@ function preload() {
   img_setting = loadImage('./assets/setting.png');
   img_refresh = loadImage('./assets/refresh.png');
   img_back = loadImage('./assets/back.png');
+  img_downArrow = loadImage('./assets/down_arrow.png');
 
 
 
@@ -62,11 +63,11 @@ function draw(){
 }
 
 function phaseReady(){
-  engine.drawArrow();
   engine.runTimer();
   counter.run();
   clock_left.run();
   clock_right.run();
+  engine.drawDownArrow();
 }
 
 function phaseTimer(){
@@ -81,14 +82,19 @@ function phaseSetting(){
 }
 
 function keyPressed(){
-  if (key === 'u'){
+  if (key === 'r'){
     clock_left.resetVars();
     clock_right.resetVars();
     counter.resetVars();
+    phase = 0;
+    nowPlayer = (nowPlayer +1) % 2;
   }
 
   if (key == ' '){
     counter.increCount();
+    if (phase == 0) {
+      phase = 1;
+    }
     click.play();
     if (nowPlayer == 0) {
       clock_left.timerStart();

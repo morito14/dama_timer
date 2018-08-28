@@ -7,7 +7,6 @@ class Engine {
 
   runSetting(){
     image(img_back, -this.iconX, this.iconY, this.iconSize, this.iconSize);
-
   }
 
   runTimer(){
@@ -16,8 +15,9 @@ class Engine {
     image(img_setting, -this.iconX, this.iconY, this.iconSize, this.iconSize);
   }
 
-  drawArrow(){
-
+  drawDownArrow(){
+    let arrowX = ((nowPlayer * 2) -1) * width / 4;
+    image(img_downArrow, arrowX, this.iconY - 10, this.iconSize, this.iconSize);
   }
 
 
