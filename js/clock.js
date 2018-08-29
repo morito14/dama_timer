@@ -75,9 +75,9 @@ class Clock {
     this.shake();
     this.timeUpdate();
     this.drawBaseRing();
-    this.drawDelayRing();
     this.drawTensionCircle();
     this.drawTime();
+    this.drawDelayRing();
     this.drawCover();
     this.playTickTock();
     pop();
