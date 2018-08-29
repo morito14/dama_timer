@@ -142,6 +142,41 @@ class Engine {
     image(img_downArrow, arrowX, this.iconY - 10, this.iconSize, this.iconSize);
   }
 
+  numberClicked(inputX, inputY){
+    inputX = inputX - (width / 2.);
+    inputY = inputY - (height / 2.);
+    print('numberClicked');
+    let timeX = -width / 3.5;
+    let timeY = -20;
+    let itemIncre = 60;
+    for (let i = 0, itemX = timeX + 10; i < this.times.length; i++){
+      if (this.times[i] < 100){
+        itemX += itemIncre;
+      } else {
+        itemX += itemIncre + 15;
+      }
+      //print('inputX:' + str(inputX) + ', inputY:' + str(inputY));
+      //print('itemX:' + str(itemX) + ', timeY:' + str(timeY));
+      //print('dist between' + str(i) + '=' + str(dist(inputX, inputY, itemX, timeY)));
+      if(dist(inputX, inputY, itemX, timeY) < 30){
+        this.timerTimeIndex = i;
+      }
+    }
+
+    let timeDelayX = -width / 3.5;
+    let timeDelayY = 50;
+    text('Delay:', timeDelayX, timeDelayY);
+    for (let i = 0, itemX = timeDelayX + 10; i < this.timesDelay.length; i++){
+      if (this.timesDelay[i] < 100){
+        itemX += itemIncre;
+      } else {
+        itemX += itemIncre + 15;
+      }
+      if(dist(inputX, inputY, itemX, timeDelayY) < 30){
+        this.timerDelayTimeIndex = i;
+      }
+    }
+  }
 
   drawInfo4Debug(){
     push();

@@ -1,7 +1,7 @@
 let phase = 2;
 let nowPlayer = 0;
-const FRAME_RATE = 60;
-let timerTime = 20.;
+const FRAME_RATE = 30;
+let timerTime = 60.;
 let timerDelayTime = 1.;
 //let fontRegular, fontBold;
 let countSound = new Array();
@@ -85,25 +85,51 @@ function phaseSetting(){
   engine.runSetting();
 }
 
+function refreshPressed(){
+  clock_left.resetVars();
+  clock_right.resetVars();
+  counter.resetVars();
+  phase = 0;
+  nowPlayer = (nowPlayer +1) % 2;
+}
+
+function settingPressed(){
+  clock_left.resetVars();
+  clock_right.resetVars();
+  counter.resetVars();
+
+  if (phase == 2) {
+    phase = 0;
+  } else {
+    phase = 2;
+  }
+}
+
+function buttonPressed(){
+  counter.increCount();
+  if (phase == 0) {
+    phase = 1;
+  }
+  click.play();
+  if (nowPlayer == 0) {
+    clock_left.timerStart();
+    clock_right.timerStop();
+    nowPlayer = 1;
+  } else {
+    clock_left.timerStop();
+    clock_right.timerStart();
+    nowPlayer = 0;
+  }
+  spacePressedTime = passedTime;
+}
+
 function keyPressed(){
   if (key === 'r'){
-    clock_left.resetVars();
-    clock_right.resetVars();
-    counter.resetVars();
-    phase = 0;
-    nowPlayer = (nowPlayer +1) % 2;
+    refreshPressed();
   }
 
   if (key == 's'){
-    clock_left.resetVars();
-    clock_right.resetVars();
-    counter.resetVars();
-
-    if (phase == 2) {
-      phase = 0;
-    } else {
-      phase = 2;
-    }
+    settingPressed();
   }
 
   //for debug
@@ -122,23 +148,32 @@ function keyPressed(){
 
   //chattering
   if (key == ' ' && abs(passedTime - spacePressedTime) > 0.5 * FRAME_RATE){
-    counter.increCount();
-    if (phase == 0) {
-      phase = 1;
-    }
-    click.play();
-    if (nowPlayer == 0) {
-      clock_left.timerStart();
-      clock_right.timerStop();
-      nowPlayer = 1;
-    } else {
-      clock_left.timerStop();
-      clock_right.timerStart();
-      nowPlayer = 0;
-    }
-
-    spacePressedTime = passedTime;
+    buttonPressed();
   }
 
   return false;
+}
+
+function mousePressed(){
+  somewhereClicked(mouseX, mouseY);
+  print('clicked X=' + str(mouseX) + ' Y=' + str(mouseY));
+  print(map(mouseX, 0, width, 0, 1));
+}
+
+function somewhereClicked(x, y){
+  if (phase != 2) { //not in setting page
+    if (y > height * 0.17 && abs(passedTime - spacePressedTime) > 0.5 * FRAME_RATE){ //when timer is clicked
+      buttonPressed();
+    } else if (y < height * 0.17 && x > width * 0.91) {
+      refreshPressed();
+    } else if (y < height * 0.17 && x < width * 0.08) {
+      settingPressed();
+    }
+  } else {// in seting page
+    if (y < height * 0.17 && x < width * 0.08) {
+      settingPressed();
+    } else {
+      engine.numberClicked(x, y);
+    }
+  }
 }
