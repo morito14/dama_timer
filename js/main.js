@@ -8,6 +8,8 @@ let countSound = new Array();
 let tick1, tick2;
 let explosion;
 let click;
+let spacePressedTime = 0;
+let passedTime = 0;
 
 function preload() {
   /* laod sound effects */
@@ -59,6 +61,8 @@ function draw(){
     phaseSetting();
     break;
   }
+
+  passedTime += 1;
 
 }
 
@@ -116,7 +120,8 @@ function keyPressed(){
     engine.increTimerDelayTimeIndex();
   }
 
-  if (key == ' '){
+  //chattering
+  if (key == ' ' && abs(passedTime - spacePressedTime) > 0.5 * FRAME_RATE){
     counter.increCount();
     if (phase == 0) {
       phase = 1;
@@ -132,6 +137,7 @@ function keyPressed(){
       nowPlayer = 0;
     }
 
+    spacePressedTime = passedTime;
   }
 
   return false;
