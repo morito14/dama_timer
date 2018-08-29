@@ -5,8 +5,8 @@ class Engine {
     this.iconY = - height / 2.5;
     this.times = [10, 30, 60, 90, 120, 300, 600];
     this.timesDelay = [0, 0.5, 1, 2, 3, 4, 5];
-    this.timerTimeIndex = 4;
-    this.timerDelayTimeIndex = 0;
+    this.timerTimeIndex = 2;
+    this.timerDelayTimeIndex = 2;
 
     //for red circle
     this.timeRedX = 0;
