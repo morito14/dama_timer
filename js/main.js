@@ -1,6 +1,6 @@
 let phase = 0;
 let nowPlayer = 0;
-const FRAME_RATE = 5;
+const FRAME_RATE = 30;
 let timerTime = 60.;
 let timerDelayTime = 1.;
 let countSound = new Array();
