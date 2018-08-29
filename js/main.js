@@ -1,13 +1,9 @@
-let phase = 2;
+let phase = 0;
 let nowPlayer = 0;
-const FRAME_RATE = 30;
+const FRAME_RATE = 5;
 let timerTime = 60.;
 let timerDelayTime = 1.;
-//let fontRegular, fontBold;
 let countSound = new Array();
-let tick1, tick2;
-let explosion;
-let click;
 let spacePressedTime = 0;
 let passedTime = 0;
 
@@ -15,6 +11,7 @@ function preload() {
   /* laod sound effects */
   tick1 = loadSound('./assets/tick1.wav');
   tick2 = loadSound('./assets/tick2.wav');
+  tickNormal = loadSound('./assets/left30sec.wav');
   explosion = loadSound('./assets/explosion.wav');
   click = loadSound('./assets/click.wav');
   /* load icons */
@@ -22,9 +19,6 @@ function preload() {
   img_refresh = loadImage('./assets/refresh.png');
   img_back = loadImage('./assets/back.png');
   img_downArrow = loadImage('./assets/down_arrow.png');
-
-
-
   for(let i = 0; i < 10; i++) {
     countSound[i] = loadSound('./assets/count' + str(i + 1) + '.wav');
   }

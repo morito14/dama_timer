@@ -52,7 +52,9 @@ class Clock {
 
   playTickTock(){
     if (ceil(this.tmpTime) != ceil(this.timeLeft) && this.delayTimeLeft == 0) {
-      if (ceil(this.tmpTime) > 11) {
+      if (ceil(this.tmpTime) > 31) {
+        tickNormal.play();
+      } else if (ceil(this.tmpTime) > 11) {//20 ~ 10 sec
         if (ceil(this.timeLeft) % 2 == 0) {
           tick1.play();
         } else {
@@ -63,7 +65,6 @@ class Clock {
       } else {
         explosion.play();
       }
-
     }
     this.tmpTime = this.timeLeft
   }
@@ -87,7 +88,7 @@ class Clock {
     noFill();
     stroke(122, 125, 120);//gray
     //stroke(33, 175, 255);//blue
-    strokeWeight(12.);
+    strokeWeight(10.);
     ellipse(0, 0, this.sizeClock);
     pop();
   }
@@ -164,7 +165,7 @@ class Clock {
       push();
       noFill()
       stroke(33, 175, 255);//blue
-      strokeWeight(12.);
+      strokeWeight(10.);
 
       //draw ring
       if (percent == 1) {
