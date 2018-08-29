@@ -9,14 +9,12 @@ class Counter {
 
   drawCount(){
     push();
-    stroke(33, 175, 255);//blue
-    //stroke('black');//blue
-    //strokeWeight(3.);
-    textSize(50);
+    noStroke();//blue
+    textSize(30);
     textStyle(NORMAL);
     textAlign(CENTER, CENTER);
     //fill(33, 175, 255);
-    fill('white');
+    fill(122, 125, 120);//gray
     text(str(ceil(this.count / 2)), 0, -height / 3.5);
     pop();
   }

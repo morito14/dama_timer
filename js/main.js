@@ -150,8 +150,8 @@ function keyPressed(){
 
 function mousePressed(){
   somewhereClicked(mouseX, mouseY);
-  print('clicked X=' + str(mouseX) + ' Y=' + str(mouseY));
-  print(map(mouseX, 0, width, 0, 1));
+  //print('clicked X=' + str(mouseX) + ' Y=' + str(mouseY));
+  //print(map(mouseX, 0, width, 0, 1));
 }
 
 function somewhereClicked(x, y){

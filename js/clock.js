@@ -40,7 +40,7 @@ class Clock {
         if (this.timeLeft > 0.01) {
           this.timeLeft -= 1 / FRAME_RATE;
         } else {
-          print('timeout');
+          //print('timeout');
           this.timeLeft = 0.;
           this.delayTimeLeft = 0.;
           this.flgTimeOver = true;
@@ -111,7 +111,7 @@ class Clock {
     push();
     fill(175, 29, 41);
     noStroke();
-    ellipse(0, 0, circlePercent * (this.sizeClock - 12) + pulse);
+    ellipse(0, 0, circlePercent * (this.sizeClock - 6) + pulse);
     pop();
 
     //for debug
@@ -123,12 +123,11 @@ class Clock {
   }
 
   resetVars(){
-    //this.timeStart =
     this.tmpTime = timerTime;
     this.time = timerTime;
     this.delayTime = timerDelayTime;
     this.timeLeft = this.time;
-    print('timerDelayTIme =' + timerDelayTime);
+    //print('timerDelayTIme =' + timerDelayTime);
     this.delayTimeLeft = this.delayTime;
     this.screenShakeValue = -1;
     /* flags */

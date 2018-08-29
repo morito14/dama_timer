@@ -145,7 +145,7 @@ class Engine {
   numberClicked(inputX, inputY){
     inputX = inputX - (width / 2.);
     inputY = inputY - (height / 2.);
-    print('numberClicked');
+    //print('numberClicked');
     let timeX = -width / 3.5;
     let timeY = -20;
     let itemIncre = 60;
@@ -165,7 +165,6 @@ class Engine {
 
     let timeDelayX = -width / 3.5;
     let timeDelayY = 50;
-    text('Delay:', timeDelayX, timeDelayY);
     for (let i = 0, itemX = timeDelayX + 10; i < this.timesDelay.length; i++){
       if (this.timesDelay[i] < 100){
         itemX += itemIncre;
